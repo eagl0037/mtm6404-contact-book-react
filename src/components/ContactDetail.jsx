@@ -1,7 +1,8 @@
 // src/components/ContactDetail.jsx
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { db, doc, getDoc, deleteDoc } from '../db';
+import { db } from '../db';
+import { doc, getDoc, deleteDoc } from 'firebase/firestore';
 import './ContactDetail.css'; // For styling
 
 function ContactDetail() {

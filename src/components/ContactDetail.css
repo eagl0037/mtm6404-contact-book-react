@@ -1,0 +1,32 @@
+/* src/components/ContactDetail.css */
+.contact-detail-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
+    text-align: left;
+  }
+  
+  .contact-detail-container h2 {
+    color: #333;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+  }
+  
+  .contact-detail-container p {
+    margin-bottom: 10px;
+    color: #555;
+  }
+  
+  .contact-detail-container p strong {
+    color: #333;
+  }
+  
+  .contact-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+  }
+  
