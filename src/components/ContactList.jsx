@@ -1,7 +1,9 @@
 // src/components/ContactList.jsx
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { db, collection, getDocs, query, orderBy } from '../db';
+import { db } from '../db';
+import { collection, getDocs, query, orderBy } from 'firebase/firestore';
+
 import './ContactList.css'; // For styling
 
 function ContactList() {

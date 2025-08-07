@@ -1,12 +1,21 @@
 // src/components/ContactForm.jsx
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { db, collection, addDoc, doc, getDoc, updateDoc } from '../db';
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  updateDoc,
+  collection,
+  addDoc,
+} from 'firebase/firestore';
 import './ContactForm.css'; // For styling
 
 function ContactForm() {
   const { id } = useParams(); // Will be undefined for new contact
   const navigate = useNavigate();
+  const db = getFirestore();
+
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -14,6 +23,7 @@ function ContactForm() {
     phone: '', // Optional
     address: '', // Optional
   });
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const isEditing = !!id;
@@ -42,7 +52,7 @@ function ContactForm() {
     } else {
       setLoading(false); // No loading needed for new contact form
     }
-  }, [id, isEditing]);
+  }, [id, isEditing, db]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -59,14 +69,13 @@ function ContactForm() {
         const contactRef = doc(db, 'contacts', id);
         await updateDoc(contactRef, formData);
         alert("Contact updated successfully!");
+        navigate(`/contact/${id}`);
       } else {
         const contactsCollectionRef = collection(db, 'contacts');
         const docRef = await addDoc(contactsCollectionRef, formData);
         alert("Contact added successfully!");
-        navigate(`/contact/${docRef.id}`); // Navigate to new contact's detail page
-        return; // Exit to prevent navigating to current ID for new contact
+        navigate(`/contact/${docRef.id}`);
       }
-      navigate(`/contact/${id}`); // Navigate to updated contact's detail page
     } catch (err) {
       console.error("Error saving contact:", err);
       alert("Failed to save contact.");
